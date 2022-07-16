@@ -1,0 +1,3 @@
+usar função dentro do styled component
+
+color: ${({ theme }) => theme.colors.primary};
