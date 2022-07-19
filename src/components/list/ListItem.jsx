@@ -48,7 +48,7 @@ function ListItem({ list }) {
         {title}
       </div>
       <Icon>
-        <div onClick={()=>{removeItem(id)}}>
+        <div onClick={()=>{removeItem(id), window.location.reload(false)}}>
           <FontAwesomeIcon icon={faTrashCan} size="lg" />
         </div>
       </Icon>
@@ -56,7 +56,7 @@ function ListItem({ list }) {
       <ButtonAddList handleAdd={handleAddSubIten}>
         Adicione sub-itens a sua lista
       </ButtonAddList>
-      {item.map(item => <SubListItem id={id} item={item} key={id}/>)}
+      {item.map(item => <SubListItem id={id} item={item}/>)}
     </MainListWrapper>
   )
 }

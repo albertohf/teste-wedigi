@@ -1,11 +1,10 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from "styled-components";
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ListItem from '../components/list/ListItem';
 import ButtonAddList from '../components/list/ButtomAddList';
-import { getListTodoList, addNewlist } from '../services/localstorage';
-import { useState, useEffect, useRef } from 'react'
+import { getTodoList, addNewlist } from '../services/localstorage';
 
 const Container = styled.div`
   display: flex;
@@ -22,26 +21,27 @@ const ContainerList = styled.div`
 
 function Home() {
   const [todoList, setTodoList] = useState([]);
-  const [data, setData] = useState('');
+  const [data, setData] = useState([]);
 
   useEffect(() => {
-    setTodoList(getListTodoList());
+    setTodoList(getTodoList());
   }, [data]);
   // TODO referenciar todoList para o useEffect causa loopinfinito
   // não sei a solução para o problema então usei 
   // window.location.reload(false) nos clicks para retornar a atualização
   // até descobrir como faço a atualização.
-
+ 
   const handleAddList = (data) => {
-    setData(data)
+    setData(data);
     addNewlist(data);
   };
     return (
     <>
       <Header />
       <Container>
+        {data}
         <ButtonAddList
-          handleAdd={handleAddList} >
+          handleAdd={handleAddList}>
           Qual lista você deseja criar ?
         </ButtonAddList>
       </Container>

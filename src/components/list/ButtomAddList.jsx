@@ -1,8 +1,7 @@
-import React from 'react'
-import styled from 'styled-components'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus } from '@fortawesome/free-solid-svg-icons'
-import { useState } from 'react'
+import React,{ useState } from 'react';
+import styled from 'styled-components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 const MainButtonWrapper = styled.div`
   width: 100%;
@@ -40,8 +39,7 @@ function ButtomAddList(props) {
           placeholder={props.children}
           onChange={(e) => setList(e.target.value)}/>
       <div onClick={()=>{
-        props.handleAdd(list) 
-        window.location.reload(false)
+        props.handleAdd(list)
         }}>
         <FontAwesomeIcon icon={faPlus} size="lg" />
       </div>
