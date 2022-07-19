@@ -1,3 +1,4 @@
+import React from 'react'
 import styled from 'styled-components';
 import logo from '../assets/wedigi.svg';
 import cart from '../assets/cart.svg';
@@ -9,13 +10,12 @@ const HeaderWrapper = styled.main`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 24px;
+  padding: 0 28px;
 `;
 const Divider = styled.span`
   position: absolute;
-  width: 100%;
+  width: 99%;
   border: 1px solid #F5F5F5;
-  margin-bottom: 20px;
 `
 
 function Header() {

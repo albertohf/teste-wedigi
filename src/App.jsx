@@ -1,11 +1,10 @@
-import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
-import Header from './components/Header';
-import Footer from './components/Footer';
-import ListItem from './components/list/ListItem';
+import { createGlobalStyle, ThemeProvider } from "styled-components";
+import Home from "./pages/Home";
+
 
 const theme = {
   colors: {
-    primary: '#E2E8E9',
+    primarygray: '#E2E8E9',
     white001: '#FFFFFF',
   },
   fonts: {
@@ -13,26 +12,18 @@ const theme = {
   }
 }
 const GlobalStyle = createGlobalStyle`
-  * {
+  body {
+    width:100vw;
     margin: 0;
     padding: 0;
-  }
-`
-const MainBodylist = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-`
+  }`
+
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
         <GlobalStyle />
-        <Header />
-        <MainBodylist>
-          <ListItem />
-        </MainBodylist>
-        <Footer />
+        <Home/>
     </ThemeProvider>
   );
 }
