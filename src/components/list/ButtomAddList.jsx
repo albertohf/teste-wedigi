@@ -40,6 +40,7 @@ function ButtomAddList(props) {
           onChange={(e) => setList(e.target.value)}/>
       <div onClick={()=>{
         props.handleAdd(list)
+        window.location.reload(false)
         }}>
         <FontAwesomeIcon icon={faPlus} size="lg" />
       </div>

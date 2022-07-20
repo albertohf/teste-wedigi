@@ -35,7 +35,11 @@ function ListItem({ list }) {
   const { id, title, item } = list
 
   const handleAddSubIten = (item) => {
-    addItemlist(id, item);
+    if(typeof item !== 'string' || item.trim().length === 0) {
+      alert("Campo Add Sub-item Lista Vazio");
+    } else {
+      addItemlist(id, item);
+    }
   };
   const removeItem = (id) => {
     removelist(id)

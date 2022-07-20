@@ -49,8 +49,12 @@ function Home() {
   }
  
   const handleAddList = (data) => {
-    setData(data);
-    addNewlist(data);
+    if(typeof data !== 'string' || data.trim().length === 0) {
+      alert("Campo Add Lista Vazio");
+    } else {
+      setData(data);
+      addNewlist(data);
+    }
   };
     return (
     <>
