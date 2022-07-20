@@ -27,18 +27,20 @@ export const removelist = (id) => {
   localStorage["todoList"] = JSON.stringify(todoList);
 };
 
-export const removeItemlist = (id, item) => {
+export const removeItemlist = (id, index) => {
   let todoList = getTodoList();
   const indexItem = todoList.filter(object => object.id === id );
-  const index = indexItem[0].item.map(object => object).indexOf(item);
   indexItem[0].item.splice(index, 1);
   localStorage["todoList"] = JSON.stringify(todoList);
 };
 
-// export const editListItem = (id, newListItem) => {
-//   let todoList = getTodoList();
-//   const index = todoList[id].item.map(object => object).indexOf(item);
-//   console.log(index);
-//   todoList[id].item.splice(index, 1);
-//   localStorage["todoList"] = JSON.stringify(todoList);
-// };
+export const editListItem = (id, index, newValue) => {
+  // console.log(id)
+  // console.log(index)
+  // console.log(newValue)
+  // let todoList = getTodoList();
+  // const indexItem = todoList.filter(object => object.id === id );
+  // console.log(indexItem);
+  // indexItem[0].item.splice(index, 1);
+  // localStorage["todoList"] = JSON.stringify(todoList);
+};

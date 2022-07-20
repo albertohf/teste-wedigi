@@ -56,7 +56,7 @@ function ListItem({ list }) {
       <ButtonAddList handleAdd={handleAddSubIten}>
         Adicione sub-itens a sua lista
       </ButtonAddList>
-      {item.map(item => <SubListItem id={id} item={item}/>)}
+      {item.map((item, index) => <SubListItem index={index} id={id} item={item}/>)}
     </MainListWrapper>
   )
 }

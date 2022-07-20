@@ -5,6 +5,7 @@ import Footer from '../components/Footer';
 import ListItem from '../components/list/ListItem';
 import ButtonAddList from '../components/list/ButtomAddList';
 import { getTodoList, addNewlist } from '../services/localstorage';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 const Container = styled.div`
   display: flex;
@@ -17,6 +18,9 @@ const Container = styled.div`
 const ContainerList = styled.div`
   height: 560px;
   overflow: auto;
+  ul {
+    padding: 0
+  }
 `
 
 function Home() {
@@ -25,11 +29,24 @@ function Home() {
 
   useEffect(() => {
     setTodoList(getTodoList());
+    updateComponent(getTodoList())
   }, [data]);
   // TODO referenciar todoList para o useEffect causa loopinfinito
   // não sei a solução para o problema então usei 
   // window.location.reload(false) nos clicks para retornar a atualização
-  // até descobrir como faço a atualização.
+  // até descobrir como faço a atualização dinâmica.
+
+  const [component, updateComponent] = useState(todoList);
+
+  function handleOnDragEnd(result) {
+    if (!result.destination) return;
+
+    const items = Array.from(component);
+    const [reorderedItem] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, reorderedItem);
+
+    updateComponent(items);
+  }
  
   const handleAddList = (data) => {
     setData(data);
@@ -39,18 +56,36 @@ function Home() {
     <>
       <Header />
       <Container>
-        {data}
         <ButtonAddList
           handleAdd={handleAddList}>
           Qual lista você deseja criar ?
         </ButtonAddList>
       </Container>
         {
-          todoList.length > 0 ? (
+          component.length > 0 ? (
             <>
             <Container>
               <ContainerList>
-                {todoList.map(todoList => <ListItem list={todoList} key={todoList.id}/>)}
+                <DragDropContext onDragEnd={handleOnDragEnd}>
+                  <Droppable droppableId="component">
+                    {(provided) => (
+                      <ul className="component" {...provided.droppableProps} ref={provided.innerRef}>
+                        {component.map((component, index) => {
+                          return (
+                            <Draggable key={component.id} draggableId={component.id} index={index}>
+                              {(provided) => (
+                                <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+                                  {<ListItem list={component} key={component.id}/>}
+                                </li>
+                              )}
+                            </Draggable>
+                          );
+                        })}
+                        {provided.placeholder}
+                      </ul>
+                    )}
+                  </Droppable>
+                </DragDropContext>
               </ContainerList>
             </Container>
               <Footer />

@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashCan } from '@fortawesome/free-regular-svg-icons'
-import { removeItemlist } from '../../services/localstorage';
+import { removeItemlist, editListItem } from '../../services/localstorage';
 
 const MainItemWrapper = styled.article`
   display: flex;
@@ -28,19 +28,29 @@ const Divider = styled.span`
   border: 1px solid #F5F5F5;
 `
 
-function SubListItem({ id, item }) {
-
-  const removeItem = (id, item) => {
-    removeItemlist(id, item);
+function SubListItem({ id, index, item }) {
+  const [value, setValue] = useState(item);
+  const removeItem = (id, index) => {
+    removeItemlist(id, index);
   }
+  const onChange = (e) => {
+    const html = e.target.innerHTML;
+    setValue(html);
+    console.log(html)
+  };
+  const submitItem = () => {
+    editListItem(id, index, value)
+  }
+  
   return (
     <MainItemWrapper>
       <Item>
-      <div>
-        {item}
+      <div suppressContentEditableWarning="true"
+        contentEditable={true} onInput={onChange} onBlur={submitItem}>
+        {value}
       </div>
       <div onClick={()=>{
-        removeItem(id, item),
+        removeItem(id, index),
         window.location.reload(false)
       }}>
         <FontAwesomeIcon icon={faTrashCan} size="lg" />
