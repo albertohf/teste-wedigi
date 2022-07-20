@@ -36,7 +36,6 @@ function SubListItem({ id, index, item }) {
   const onChange = (e) => {
     const html = e.target.innerHTML;
     setValue(html);
-    console.log(html)
   };
   const submitItem = () => {
     editListItem(id, index, value)
@@ -47,7 +46,7 @@ function SubListItem({ id, index, item }) {
       <Item>
       <div suppressContentEditableWarning="true"
         contentEditable={true} onInput={onChange} onBlur={submitItem}>
-        {value}
+        {item}
       </div>
       <div onClick={()=>{
         removeItem(id, index),

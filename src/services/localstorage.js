@@ -35,12 +35,8 @@ export const removeItemlist = (id, index) => {
 };
 
 export const editListItem = (id, index, newValue) => {
-  // console.log(id)
-  // console.log(index)
-  // console.log(newValue)
-  // let todoList = getTodoList();
-  // const indexItem = todoList.filter(object => object.id === id );
-  // console.log(indexItem);
-  // indexItem[0].item.splice(index, 1);
-  // localStorage["todoList"] = JSON.stringify(todoList);
+  let todoList = getTodoList();
+  const position = todoList.map(object => object.id).indexOf(id);
+  todoList[position].item.splice(index, 1, newValue);
+  localStorage["todoList"] = JSON.stringify(todoList);
 };
