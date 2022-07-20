@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import dot from '../../assets/dot.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashCan } from '@fortawesome/free-regular-svg-icons'
 import ButtonAddList from './ButtomAddList';
 import SubListItem from './SubListItem';
-import { addItemlist, removelist } from '../../services/localstorage';
+import { addItemlist, removelist, editListTitle } from '../../services/localstorage';
 
 const MainListWrapper = styled.article`
   width: 360px;
@@ -33,6 +33,7 @@ const Icon = styled.div`
 
 function ListItem({ list }) {
   const { id, title, item } = list
+  const [value, setValue] = useState(list);
 
   const handleAddSubIten = (item) => {
     if(typeof item !== 'string' || item.trim().length === 0) {
@@ -41,6 +42,13 @@ function ListItem({ list }) {
       addItemlist(id, item);
     }
   };
+  const onChange = (e) => {
+    const html = e.target.innerHTML;
+    setValue(html);
+  };
+  const submitItem = () => {
+    editListTitle(id, value)
+  }
   const removeItem = (id) => {
     removelist(id)
   } 
@@ -48,8 +56,11 @@ function ListItem({ list }) {
     <MainListWrapper>
       <Title>
       <div>
-        <img src={dot} alt="" />
+      <img src={dot} alt="" />
+      <div suppressContentEditableWarning="true"
+      contentEditable={true} onInput={onChange} onBlur={submitItem}>
         {title}
+      </div>
       </div>
       <Icon>
         <div onClick={()=>{removeItem(id), window.location.reload(false)}}>

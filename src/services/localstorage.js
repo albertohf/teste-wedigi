@@ -33,6 +33,12 @@ export const removeItemlist = (id, index) => {
   indexItem[0].item.splice(index, 1);
   localStorage["todoList"] = JSON.stringify(todoList);
 };
+export const editListTitle = (id, newValue) => {
+  let todoList = getTodoList();
+  const position = todoList.map(object => object.id).indexOf(id);
+  todoList[position].title = newValue
+  localStorage["todoList"] = JSON.stringify(todoList);
+};
 
 export const editListItem = (id, index, newValue) => {
   let todoList = getTodoList();
