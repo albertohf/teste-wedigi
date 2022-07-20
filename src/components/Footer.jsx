@@ -10,7 +10,7 @@ const Text = styled.p`
 `
 const FooterWrapper = styled.main`
   width: 100%;
-  position: absolute;
+  position: sticky;
   bottom: 0;
   height: 120px;
   background-color: black;

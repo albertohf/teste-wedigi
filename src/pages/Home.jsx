@@ -14,6 +14,9 @@ const Container = styled.div`
   align-items: center;
   padding: 0 12px;
   margin-bottom: 20px;
+    @media screen and (min-width: 767px) {
+      flex-direction: row;
+    }
 `
 const ContainerList = styled.div`
   height: 560px;
@@ -21,6 +24,21 @@ const ContainerList = styled.div`
   ul {
     padding: 0
   }
+  li {
+    list-style-type: none;
+  }
+  @media screen and (min-width: 767px) {
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    li {
+      margin: 20px;
+    }
+      width: 91%;
+      display: flex;
+      justify-content: center;
+    }
 `
 
 function Home() {
